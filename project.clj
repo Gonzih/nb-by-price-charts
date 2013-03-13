@@ -35,4 +35,5 @@
                                                               com.sun.jmx/jmxri]]]
                   :plugins      [[lein-cljsbuild "0.3.0"]]}
      :production {:dependencies []
-                  :plugins      []}})
+                  :plugins      []}}
+  :min-lein-version "2.0.0")
