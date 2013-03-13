@@ -1,8 +1,5 @@
 (ns migrations.001-base-schema
-  (:require [korma.db              :refer :all]
-            [korma.core            :refer :all]
-            [config.utils          :refer :all]
-            [config.migrate-config :refer :all]))
+  (:require [korma.core :refer :all]))
 
 (defn up []
   (exec-raw "CREATE TABLE IF NOT EXISTS metals(
@@ -14,7 +11,3 @@
 
 (defn down []
   (exec-raw "DROP TABLE IF EXISTS metals;"))
-
-(defn -main []
-  (defdb db-for-migration (postgres (database-config)))
-  (up))
