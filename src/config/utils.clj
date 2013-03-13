@@ -1,12 +1,15 @@
 (ns config.utils
   (:require [clojure.java.io :as io]
             [clojure.string  :as string])
-  (:import [java.io PushbackReader]
+  (:import [java.io PushbackReader File]
            [java.net URI]))
 
 (defn read-database-config []
-  (with-open [r (io/reader "src/config/database.clj")]
-    (read (PushbackReader. r))))
+  (if (.exists (File. "src/config/database.clj"))
+    (with-open [r (io/reader "src/config/database.clj")]
+      (read (PushbackReader. r)))
+    {}))
+
 
 (defn parse-database-url []
     (let [mode   :prod
