@@ -12,14 +12,14 @@
 (defroutes app-routes
   (GET "/" [] (layout/render))
   (GET "/data" [currency]
-       (let [currency (if-not (#{"rub" "dollar"} currency) "rub" currency)]
-         (data/json-table (keyword currency))))
+    (let [currency (if-not (#{"rub" "dollar"} currency) "rub" currency)]
+      (data/json-table (keyword currency))))
   (route/not-found (layout/not-found)))
 
 (def app
   (-> app-routes
-    wrap-params
-    (wrap-file "js")))
+      wrap-params
+      (wrap-file "js")))
 
 (defn populate-bg []
   (try
