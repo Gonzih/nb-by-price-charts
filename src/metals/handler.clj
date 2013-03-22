@@ -27,7 +27,6 @@
 (defn populate-bg []
   (try
     (data/populate 1)
-    (data/reset-json)
     (catch Exception e
       (log/info (str "Daemon Thread Exception: " (.getMessage e)))))
   (Thread/sleep (* 1000 60 60 10))

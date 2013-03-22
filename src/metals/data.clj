@@ -87,7 +87,8 @@
   (log/info (str "Populating db for " amount " of days"))
   (let [all-days (all-days (tm/now))
         days (->> all-days (take amount) reverse (map #(fmt/unparse formatter %)))]
-    (doall (map insert-values-for-date days))))
+    (doall (map insert-values-for-date days)))
+  (reset-json))
 
 (defmacro get-table [currency]
   (let [metals ["g" "s" "p"]
