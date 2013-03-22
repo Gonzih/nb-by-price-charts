@@ -14,6 +14,9 @@
   (GET "/data" [currency]
     (let [currency (if-not (#{"rub" "dollar"} currency) "rub" currency)]
       (data/json-table (keyword currency))))
+  (GET "/populate" [days]
+    (data/populate (or (data/to-i days) 1))
+    "ok")
   (route/not-found (layout/not-found)))
 
 (def app

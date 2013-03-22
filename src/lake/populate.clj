@@ -1,6 +1,5 @@
 (ns lake.populate
   (:require [metals.data :as data]))
 
-(defn -main [& args] (if (not (empty? args))
-                       (data/populate (Integer/parseInt (first args)))
-                       (data/populate 1)))
+(defn -main [& args]
+  (data/populate (or (data/to-i (first args)) 1)))
