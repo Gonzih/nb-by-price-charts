@@ -33,7 +33,7 @@
   (Thread/sleep (* 1000 60 60 10))
   (recur))
 
-(doto
-  (Thread. populate-bg)
-  (.setDaemon true)
-  (.start))
+;(doto
+  ;(Thread. populate-bg)
+  ;(.setDaemon true)
+  ;(.start))
