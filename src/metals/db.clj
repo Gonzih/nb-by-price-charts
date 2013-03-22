@@ -42,3 +42,6 @@
   (if (not-duplicate? args)
     (insert :metals
       (values args))))
+
+(defn delete-all []
+  (delete :metals))
