@@ -8,6 +8,8 @@
             [cheshire.core         :as json]
             [clojure.tools.logging :as log]))
 
+(declare reset-json)
+
 (defn to-i [v] (when-not (nil? v) (Integer/parseInt v)))
 
 (defn api-url [date]
