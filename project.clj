@@ -19,8 +19,8 @@
         :source-paths ["src/cljs"]
         :compiler {
           :output-to "js/main.js"
-          ;:optimizations :advanced
-          :optimizations :simple
+          :optimizations :advanced
+          ;:optimizations :simple
           :pretty-print true
           :externs ["externs/google_vizualization_api.js"
                     "externs/jquery.js"]}}]}
