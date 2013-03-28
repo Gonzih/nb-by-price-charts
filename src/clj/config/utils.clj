@@ -5,10 +5,11 @@
            [java.net URI]))
 
 (defn read-database-config []
-  (if (.exists (File. "src/config/database.clj"))
-    (with-open [r (io/reader "src/config/database.clj")]
-      (read (PushbackReader. r)))
-    {}))
+  (let [cfg-path "src/clj/config/database.clj"]
+    (if (.exists (File. cfg-path))
+      (with-open [r (io/reader cfg-path)]
+        (read (PushbackReader. r)))
+      {})))
 
 
 (defn parse-database-url []
