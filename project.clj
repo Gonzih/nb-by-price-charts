@@ -21,7 +21,7 @@
           :output-to "js/main.js"
           :optimizations :advanced
           ;:optimizations :simple
-          :pretty-print true
+          :pretty-print false
           :externs ["externs/google_vizualization_api.js"
                     "externs/jquery.js"]}}]}
   :ring {:handler metals.handler/app}
