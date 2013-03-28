@@ -6,8 +6,7 @@
             [compojure.route       :as route]
             [metals.layout         :as layout]
             [metals.data           :as data]
-            [clojure.tools.logging :as log]
-            [clojure.pprint]))
+            [clojure.tools.logging :as log]))
 
 (defroutes app-routes
   (GET "/" [] (layout/render))
@@ -21,16 +20,17 @@
 
 (def app
   (-> app-routes
+      handler/site
       wrap-params
       (wrap-file "js")))
 
-(defn populate-bg []
-  (try
-    (data/populate 1)
-    (catch Exception e
-      (log/info (str "Daemon Thread Exception: " (.getMessage e)))))
-  (Thread/sleep (* 1000 60 60 10))
-  (recur))
+;(defn populate-bg []
+  ;(try
+    ;(data/populate 1)
+    ;(catch Exception e
+      ;(log/info (str "Daemon Thread Exception: " (.getMessage e)))))
+  ;(Thread/sleep (* 1000 60 60 10))
+  ;(recur))
 
 ;(doto
   ;(Thread. populate-bg)

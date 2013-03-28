@@ -9,11 +9,9 @@
                  [hiccup "1.0.2"]
                  [korma "0.3.0-RC4"]
                  [postgresql "9.0-801.jdbc4"]
-                 [drift "1.4.5"]
                  [clj-time "0.4.4"]
                  [cheshire "5.0.2"]]
-  :plugins [[lein-ring "0.8.2"]
-            [drift "1.4.5"]]
+  :plugins [[lein-ring "0.8.2"]]
   :cljsbuild {
     :builds [{
         :source-paths ["src/cljs"]
@@ -34,6 +32,8 @@
                                                               com.sun.jdmk/jmxtools
                                                               com.sun.jmx/jmxri]]]
                   :plugins      [[lein-cljsbuild "0.3.0"]]}
-     :production {:dependencies []
-                  :plugins      []}}
+     :production {:dependencies [[org.clojure/tools.logging "0.2.6"]]
+                  :plugins      []}
+     :migrate    {:dependencies [[drift "1.4.5"]]
+                  :plugins      [[drift "1.4.5"]]}}
   :min-lein-version "2.0.0")
