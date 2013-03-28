@@ -4,6 +4,8 @@
   (:use-macros
         [jayq.macros :only [let-ajax]]))
 
+(declare draw-chart)
+
 (defn get-data [currency]
   (let-ajax [json {:url (str "/data?currency=" currency) :dataType :json}]
     (let [dt (js/google.visualization.DataTable.)]
