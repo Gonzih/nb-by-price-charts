@@ -20,13 +20,13 @@
                   :main   "Metal Prices Chart NB RB"}})
 
 (def fields {:ru {:date "Дата"
-                  :au "Золото 1 грамм"
-                  :ag "Серебро 50 грамм"
-                  :pt "Платина 1 грамм"}
+                  :au "Золото 1гр"
+                  :ag "Серебро 50гр"
+                  :pt "Платина 1гр"}
              :en {:date "Date"
-                  :au "Gold 1 gr"
-                  :ag "Silver 50 gr"
-                  :pt "Platinum 1 gr"}})
+                  :au "Gold 1g"
+                  :ag "Silver 50g"
+                  :pt "Platinum 1g"}})
 
 (defn get-data [currency]
   (let-ajax [json {:url (str "/data?currency=" currency) :dataType :json}]
