@@ -22,6 +22,7 @@
 
 (defn options [currency]
   (clj->js {:title (titles currency)
+            :colors ["#d0aa28" "#8d8d8d" "#6ba4a6"]
             :width  (* (.-width  js/document) 0.95)
             :height (* (.-height js/document) 0.45)}))
 
