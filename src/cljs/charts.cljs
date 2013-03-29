@@ -6,25 +6,48 @@
 
 (declare draw-chart)
 
+(defn get-locale []
+  (-> (aget js/navigator "language")
+      (->> (re-find #"en"))
+      (or "ru")
+      keyword))
+
+(def titles {:ru {:rub    "График цен продажи драгоценных металов НБ РБ (Бел. руб.)"
+                  :dollar "График цен продажи драгоценных металов НБ РБ (доллар США)"
+                  :main   "График цен продажи драгоценных металов НБ РБ"}
+             :en {:rub    "Metal Price Chart NB RB (BY)"
+                  :dollar "Metal Price Chart NB RB (USD)"
+                  :main   "Metal Prices Chart NB RB"}})
+
+(def fields {:ru {:date "Дата"
+                  :au "Золото 1 грамм"
+                  :ag "Серебро 50 грамм"
+                  :pt "Платина 1 грамм"}
+             :en {:date "Date"
+                  :au "Gold 1 gr"
+                  :ag "Silver 50 gr"
+                  :pt "Platinum 1 gr"}})
+
 (defn get-data [currency]
   (let-ajax [json {:url (str "/data?currency=" currency) :dataType :json}]
-    (let [dt (js/google.visualization.DataTable.)]
+    (let [dt (js/google.visualization.DataTable.)
+          locale (get-locale)]
       (doto dt
-        (.addColumn "string" "Дата")
-        (.addColumn "number" "Золото 1 грамм")
-        (.addColumn "number" "Серебро 50 грамм")
-        (.addColumn "number" "Платина 1 грамм")
+        (.addColumn "string" (-> fields locale :date))
+        (.addColumn "number" (-> fields locale :au))
+        (.addColumn "number" (-> fields locale :ag))
+        (.addColumn "number" (-> fields locale :pt))
         (.addRows json))
+      (aset js/document "title" (-> titles locale :main))
       (draw-chart dt currency))))
 
-(def titles {"rub"    "График цен продажи драгоценных металов НБ РБ (бел. руб.)"
-             "dollar" "График цен продажи драгоценных металов НБ РБ (доллар США)"})
-
 (defn options [currency]
-  (clj->js {:title (titles currency)
-            :colors ["#d0aa28" "#8d8d8d" "#6ba4a6"]
-            :width  (* (.-width  js/document) 0.95)
-            :height (* (.-height js/document) 0.45)}))
+  (let [locale (get-locale)
+        currency (keyword currency)]
+    (clj->js {:title (-> titles locale currency)
+              :colors ["#d0aa28" "#8d8d8d" "#6ba4a6"]
+              :width  (* (.-width  js/document) 0.95)
+              :height (* (.-height js/document) 0.45)})))
 
 (defn get-chart [currency]
   (js/google.visualization.LineChart.

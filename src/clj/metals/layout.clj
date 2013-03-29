@@ -13,7 +13,7 @@
   })();")
 
 (defn layout []
-  (html [:head [:title "График цен продажи драгоценных металов НБ РБ"]
+  (html [:head [:title "Metal Prices Chart NB RB Belarus | График цен продажи драгоценных металов НБ РБ Беларусь"]
                [:script {:type "text/javascript" :src "//www.google.com/jsapi"}]
                [:script {:type "text/javascript" :src "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}]
                [:script {:type "text/javascript" :src "/main.js"}]
