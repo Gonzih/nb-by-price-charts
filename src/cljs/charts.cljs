@@ -41,13 +41,21 @@
       (aset js/document "title" (-> titles locale :main))
       (draw-chart dt currency))))
 
+(defn get-client-w []
+  (or (aget js/document "width")
+      (-> js/document (aget "body") (aget "clientWidth"))))
+
+(defn get-client-h []
+  (or (aget js/document "height")
+      (-> js/document (aget "body") (aget "clientHeight"))))
+
 (defn options [currency]
   (let [locale (get-locale)
         currency (keyword currency)]
     (clj->js {:title (-> titles locale currency)
               :colors ["#d0aa28" "#8d8d8d" "#6ba4a6"]
-              :width  (* (.-width  js/document) 0.95)
-              :height (* (.-height js/document) 0.45)})))
+              :width  (* (get-client-w) 0.95)
+              :height (* (get-client-h) 0.45)})))
 
 (defn get-chart [currency]
   (js/google.visualization.LineChart.
