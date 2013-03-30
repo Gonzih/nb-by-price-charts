@@ -11,8 +11,6 @@
 (defn api-url [date]
   (str "http://www.nbrb.by/Services/XmlIngots.aspx?onDate=" date))
 
-(def formatter (fmt/formatter "MM/dd/yyyy"))
-
 ; For gold and platina use 1 gramm,
 ; For silver use 50 gramms
 (def selectors {"0" "1" "1" "50" "2" "1"})
@@ -34,10 +32,6 @@
                  first
                  (get :content)
                  first))
-          (sql-date [date]
-            (->> date
-                 (fmt/parse formatter)
-                 (coerce/to-sql-date)))
           (metal-key [id currency]
             (keyword (str (cond
                             (= id 0) \g
