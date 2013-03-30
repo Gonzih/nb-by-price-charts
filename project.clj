@@ -24,7 +24,7 @@
           :pretty-print false
           :externs ["externs/google_vizualization_api.js"
                     "externs/jquery.js"]}}]}
-  :ring {:handler metals.handler/app}
+  :ring {:handler charts.handler/app}
   :profiles
     {:dev        {:dependencies [[ring-mock "0.1.3"]
                                  [jayq "2.3.0"]

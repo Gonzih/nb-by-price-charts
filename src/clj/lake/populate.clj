@@ -1,5 +1,6 @@
 (ns lake.populate
-  (:require [metals.data :as data]))
+  (:require [charts.utils :refer [to-i]]
+            [metals.data :as data]))
 
 (defn -main [& args]
-  (data/populate (or (data/to-i (first args)) 1)))
+  (data/populate (or (to-i (first args)) 1)))

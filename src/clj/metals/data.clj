@@ -1,32 +1,17 @@
 (ns metals.data
-  (:require [clojure.data.xml      :as xml]
-            [clojure.string        :as s]
-            [metals.db             :as db]
-            [clj-time.core         :as tm]
+  (:require [metals.db             :as db]
             [clj-time.coerce       :as coerce]
             [clj-time.format       :as fmt]
             [cheshire.core         :as json]
-            [clojure.tools.logging :as log]))
+            [clojure.tools.logging :as log]
+            [charts.utils :refer :all]))
 
 (declare reset-json)
-
-(defn to-i [v] (when-not (nil? v) (Integer/parseInt v)))
 
 (defn api-url [date]
   (str "http://www.nbrb.by/Services/XmlIngots.aspx?onDate=" date))
 
-(defn parse-xml-url [url]
-  (-> url
-      slurp
-      s/trim
-      (s/replace-first #"^([\W]+)<","<")
-      java.io.StringReader.
-      xml/parse))
-
 (def formatter (fmt/formatter "MM/dd/yyyy"))
-
-(defn all-days [day]
-  (cons day (lazy-seq (all-days (tm/minus day (tm/days 1))))))
 
 ; For gold and platina use 1 gramm,
 ; For silver use 50 gramms
@@ -87,7 +72,7 @@
 
 (defn populate [amount]
   (log/info (str "Populating db for " amount " of days"))
-  (let [all-days (all-days (tm/now))
+  (let [all-days (all-days)
         days (->> all-days (take amount) reverse (map #(fmt/unparse formatter %)))]
     (doall (map insert-values-for-date days)))
   (reset-json))

@@ -1,4 +1,4 @@
-(ns metals.layout
+(ns views.layout
   (:require [hiccup.core :refer :all]))
 
 (def analytics-crap
