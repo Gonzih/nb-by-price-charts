@@ -19,7 +19,7 @@
 
 (defn all-days
   ([] (all-days (time/now)))
-  ([day] (cons day (lazy-seq (all-days (time/minus day (time/days 1)))))))
+  ([day] (iterate #(time/minus % (time/days 1)) day)))
 
 (defn sql-date [date]
   (->> date
