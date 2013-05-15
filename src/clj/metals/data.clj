@@ -11,8 +11,8 @@
 (defn api-url [date]
   (str "http://www.nbrb.by/Services/XmlIngots.aspx?onDate=" date))
 
-; For gold and platina use 1 gramm,
-; For silver use 50 gramms
+; For gold and platina use 1 gram,
+; For silver use 50 grams
 (def selectors {"0" "1" "1" "50" "2" "1"})
 
 (defn get-metal-id [item] (get-in item [:attrs :MetalId]))
