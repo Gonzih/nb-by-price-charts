@@ -1,6 +1,6 @@
 # metals-compojure-by
 
-Web app displaing some charts.
+Web app displaying some charts.
 
 ## Prerequisites
 
