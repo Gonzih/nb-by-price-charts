@@ -12,7 +12,7 @@
 (defroutes app-routes
   (GET "/" [] (layout/render))
   (GET "/data" [currency]
-    (let [currency (if-not (#{"rub" "dollar"} currency) "rub" currency)]
+    (let [currency (get #{"rub" "dollar"} currency "rub")]
       (data/json-table (keyword currency))))
   (GET "/populate" [days]
     (data/populate (or (to-i days) 1))
